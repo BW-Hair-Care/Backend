@@ -14,8 +14,8 @@ server.use(express.json());
 server.use(cors());
 server.use(morgan('dev'));
 
-server.use('/api/auth', authRouter);
-server.use('/api/users', usersRouter)
+server.use('/auth', authRouter);
+server.use('/stylists', usersRouter)
 
 server.get('/', (req, res) => {
 res.send("Welcome to the API!")
