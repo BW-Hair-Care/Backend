@@ -20,7 +20,7 @@ exports.up = function(knex) {
         users.integer('userType', 128)
         .notNullable()
 
-        users.string('description', 128)
+        users.string('description', 255)
         
     })     
 };
