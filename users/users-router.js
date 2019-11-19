@@ -8,7 +8,7 @@ const validatePost = require('../auth/middleware/validatePost.js');
 const validateUserId = require('../auth/middleware/validateUserId.js');
 
 //GET stylists
-router.get('/', restricted,  (req, res) => {
+router.get('/',  (req, res) => {
   Stylists.find()
       .then(users => {
         res.json(users);
