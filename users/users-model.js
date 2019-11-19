@@ -19,7 +19,7 @@ return db('users');
 
 async function add(user) {
 console.log("inside add", user);
-const [id] = await db('users').insert(user)
+const [id] = await db('users').insert(user, 'id')
 console.log(id);
 return findById(id)
  }
