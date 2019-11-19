@@ -17,12 +17,23 @@ return db('users');
 }
 
 
-async function add(user) {
-console.log("inside add", user);
-const [id] = await db('users').insert(user, 'id')
-console.log(id);
-return findById(id)
- }
+// async function add(user) {
+// console.log("inside add", user);
+// const [id] = await db('users').insert(user, 'id')
+// console.log(id);
+// return findById(id)
+//  }
+
+  function add(user) {
+  console.log("inside add", user);
+  return db('users')
+  .insert(user, 'id')
+  .then(ids => {
+  const [id] = ids;
+  return findById(id)
+  })
+  
+   }
 
  function find() {
   return db('users') 
