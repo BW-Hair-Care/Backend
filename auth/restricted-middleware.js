@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken')
-
+const secret = require('../config/secret.js')
 
 module.exports = (req, res, next) => {
   const token = req.headers.authorization;
@@ -9,11 +9,12 @@ module.exports = (req, res, next) => {
 
     
     //check the token is valid
-    jwt.verify(token, process.env.JWT_SECRET || 'this is confidential', (err, decodedToken) => {
+    jwt.verify(token, secret.jwtSecret, (err, decodedToken) => {
       if(err) {
       res.status(401).json({ message: 'Invalid Credentials' });   
       } else {
-        req.user = decodedToken;
+    
+        req.decodedJwt = decodedToken;
         
        next()
       }
