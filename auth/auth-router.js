@@ -6,6 +6,7 @@ const Users = require('../users/users-model.js');
 const secrets = require('../config/secret.js');
 
 
+//POST register
 router.post('/register', (req, res) => {
   //implement registration
   let user = req.body
@@ -13,17 +14,18 @@ router.post('/register', (req, res) => {
   user.password = hash;
 
   
-
   Users.add(user)
   .then(saved => {
   res.status(201).json(saved)  
   })
   .catch(error => {
- res.status(500).json({message: "Unable to register user", err: error});
+ res.status(500).json({message: "Unable to register user", err: error.stack});
   });
 
 });
 
+
+//POST login
 router.post('/login', (req, res) => {
   // implement login
 const { username, password } = req.body;

@@ -25,8 +25,8 @@ router.get('/',  (req, res) => {
   
   //POST a description  (stylists post)
   router.post('/:id/description', validateUserId, validatePost, (req, res) => {
-    const newObj = {...req.body, userId: req.params.id}
-    Stylists.insert(newObj)
+    const newObj = {...req.body, id: req.params.id}
+    Stylists.update(newObj)
     .then(post => {
     res.status(200).json(post) 
     })
@@ -44,7 +44,7 @@ router.get('/',  (req, res) => {
     Stylists.update(id, req.body)
     .then(updated => {
      if (updated) {
-     Stylists.getById(id) 
+     Stylists.findById(id) 
      .then(userId => {
     res.status(200).json(userId)
      }) 
