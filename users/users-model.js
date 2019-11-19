@@ -6,6 +6,7 @@ module.exports = {
   find,
   findBy,
   findById,
+  insert,
 //   getUserPosts,
   update,
   remove,
@@ -32,7 +33,17 @@ function findBy(filter) {
 console.log("inside find by", filter);
 return db('users') 
 .where(filter) 
-    }
+  }
+ 
+ 
+  // insert/ post a description on stylists account
+  function insert(post) {
+    return db('users')
+      .insert(post)
+      .then(ids => {
+        return findById(ids[0]);
+      });
+  }
 
 
 function findById(id) {
@@ -52,6 +63,7 @@ function findById(id) {
 
 
 function update(id, changes) {
+  console.log('inside PUT', id, changes);
   return db('users')
     .where({ id })
     .update(changes);
