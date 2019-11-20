@@ -70,7 +70,7 @@ router.post('/:id/review', validateUserId, validateReview, (req, res) => {
    })
    .catch(err => {
    console.log(err);
-   res.status(500).json({message: "There was an error adding the review"})
+   res.status(500).json({message: err})
   })
 });
 
