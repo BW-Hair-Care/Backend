@@ -37,7 +37,7 @@ return db('users');
 
  function find() {
   return db('users') 
-  .select('id', 'username', 'location',)  
+  .select('id', 'username', 'location','userType')  
  }
 
 function findBy(filter) {
