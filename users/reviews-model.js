@@ -22,7 +22,7 @@ module.exports = {
   
   function insert(post) {
     return db('reviews')
-      .insert(post, 'id')
+      .insert(post, 'id', 'CustomerId', 'StylistsId')
       .then(ids => {
         return getById(ids[0]);
       });
