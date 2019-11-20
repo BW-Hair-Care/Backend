@@ -9,8 +9,10 @@ module.exports = {
   };
   
   function get() {
-    return db('reviews');
-  }
+    return db('reviews') 
+    .select('id', 'customerReview', 'StylistsId',)  
+   }
+  
   
   function getById(id) {
     return db('reviews')

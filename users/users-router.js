@@ -6,6 +6,7 @@ const restricted = require('../auth/restricted-middleware.js');
 
 const validatePost = require('../auth/middleware/validatePost.js');
 const validateUserId = require('../auth/middleware/validateUserId.js');
+const validateReview = require('../auth/middleware/validateReview.js');
 
 //GET stylists
 router.get('/',  (req, res) => {
@@ -24,20 +25,20 @@ router.get('/',  (req, res) => {
 
   
   //POST a description  (stylists post)
-  router.post('/:id/description', validateUserId, validatePost, (req, res) => {
-    const newObj = {...req.body, id: req.params.id}
-    Stylists.update(newObj)
-    .then(post => {
-    res.status(200).json(post) 
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({message: "There was an error adding the description"})
-        })
-  });
+  // router.post('/:id/description', validateUserId, validatePost, (req, res) => {
+  //   const newObj = {...req.body, id: req.params.id}
+  //   Stylists.update(newObj)
+  //   .then(post => {
+  //   res.status(200).json(post) 
+  //   })
+  //   .catch(err => {
+  //     console.log(err);
+  //     res.status(500).json({message: "There was an error adding the description"})
+  //       })
+  // });
 
 
-  //PUT request
+  //PUT request add a desription to stylist's profile
   router.put('/:id', validateUserId, (req, res) => {
     const id = req.params.id
     
@@ -57,6 +58,30 @@ router.get('/',  (req, res) => {
   })
   
 });
+
+//POST request to add a review to stylists profile
+router.post('/:id/review', validateUserId, validateReview, (req, res) => {
+  
+  const newObj = {...req.body, CustomerId: req.params.id}
+  
+    Reviews.insert(newObj)
+    .then(post => {
+   res.status(200).json(post)   
+   })
+   .catch(err => {
+   console.log(err);
+   res.status(500).json({message: "There was an error adding the review"})
+  })
+});
+
+//GET stylists review
+router.get('/:id/review',  (req, res) => {
+  Reviews.get()
+      .then(reviews => {
+        res.json(reviews);
+      })
+      .catch(err => res.send(err));
+  });
 
 //DELETE request
 router.delete('/:id',validateUserId, (req, res) => {
