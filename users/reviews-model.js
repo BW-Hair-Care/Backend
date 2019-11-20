@@ -21,6 +21,7 @@ module.exports = {
   }
   
   function insert(post) {
+    console.log('inside review insert', post);
     return db('reviews')
       .insert(post, 'id', 'CustomerId', 'StylistsId')
       .then(ids => {
