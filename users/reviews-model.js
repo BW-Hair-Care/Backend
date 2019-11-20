@@ -4,6 +4,7 @@ module.exports = {
     get,
     getById,
     insert,
+    getUserReviews,
     update,
     remove,
   };
@@ -27,6 +28,13 @@ module.exports = {
       .then(ids => {
         return getById(ids[0]);
       });
+  }
+
+  function getUserReviews(userId) {
+    return db('reviews as r')
+      .join('users as u', 'u.id', 'r.CustomerId')
+      .select('r.id', 'r.customerReview', 'u.username')
+      .where('r.CustomerId', userId);
   }
   
   function update(id, changes) {
