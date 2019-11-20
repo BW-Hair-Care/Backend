@@ -74,14 +74,40 @@ router.post('/:id/review', validateUserId, validateReview, (req, res) => {
   })
 });
 
-//GET stylists review
-router.get('/:id/review',  (req, res) => {
+//GET  all stylists review
+router.get('/review',  (req, res) => {
   Reviews.get()
       .then(reviews => {
         res.json(reviews);
       })
       .catch(err => res.send(err));
   });
+
+  //GET specific stylists review
+  router.get('/:id/review',validateUserId, (req, res) => {
+    const id = req.params.id
+    Reviews.getUserReviews(id)
+    .then(posts => {
+    res.status(200).json(posts)     
+    })
+    .catch(err => {
+     console.log(err);
+     res.status(500).json({message: "There was an error getting the user's posts by this id"})
+      })
+    });
+
+  //DELETE stylists review
+  router.delete('/:id/review',validateUserId, (req, res) => {
+    const id = req.params.id
+    Reviews.remove(id)
+    .then(deleted => {
+    res.status(200).json(deleted)    
+    })
+    .catch(err => {
+     console.log(err);
+    res.status(500).json({message: "There was an error deleting this record"})
+         })
+    });
 
 //DELETE request
 router.delete('/:id',validateUserId, (req, res) => {
