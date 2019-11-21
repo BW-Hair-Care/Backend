@@ -61,7 +61,7 @@ router.get('/',  (req, res) => {
 
 //POST request to add a review to stylists profile
 router.post('/:id/review', validateUserId, validateReview, (req, res) => {
-  
+  console.log(req.body, req.params.id);
   const newObj = {...req.body, CustomerId: req.params.id}
   
     Reviews.insert(newObj)
