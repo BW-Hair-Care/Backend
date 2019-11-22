@@ -33,7 +33,7 @@ module.exports = {
   function getUserReviews(userId) {
     return db('reviews as r')
       .join('users as u', 'u.id', 'r.CustomerId')
-      .select('r.id', 'r.customerReview', 'u.username')
+      .select('r.id','r.CustomerId', 'r.customerReview', 'u.username')
       .where('r.CustomerId', userId);
   }
   
