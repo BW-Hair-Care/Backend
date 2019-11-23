@@ -5,6 +5,7 @@ module.exports = {
     getById,
     insert,
     getUserReviews,
+    findByReviewId,
     update,
     remove,
   };
@@ -36,6 +37,13 @@ module.exports = {
       .select('r.id','r.CustomerId', 'r.customerReview', 'u.username')
       .where('r.CustomerId', userId);
   }
+
+  function findByReviewId(id) {
+  console.log('inside find by function', id);
+    return db('reviews')
+        .where({id})
+        
+}
   
   function update(id, changes) {
     return db('reviews')

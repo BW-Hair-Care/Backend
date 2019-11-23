@@ -97,9 +97,9 @@ router.get('/review',  (req, res) => {
     });
 
   //DELETE stylists review
-  router.delete('/:id/review',validateUserId, (req, res) => {
-    const id = req.params.id
-    Reviews.remove(id)
+  router.delete('/:id/review/:reviewId',validateUserId, (req, res) => {
+    const reviewId = req.params.reviewId
+    Reviews.remove(reviewId)
     .then(deleted => {
     res.status(200).json(deleted)    
     })
@@ -108,6 +108,25 @@ router.get('/review',  (req, res) => {
     res.status(500).json({message: "There was an error deleting this record"})
          })
     });
+
+    //DELETE stylists review
+  // router.delete('/:id/review/:reviewId',validateUserId, (req, res) => {
+  //   const id = req.params.id
+  //    const reviewId = req.params.reviewId
+  //   Reviews.findByReviewId(id)
+  //   .then(review => {
+  //   if(review) {
+  //     Reviews.remove(reviewId)
+  //     .then(deleted => {
+  //       res.status(200).json(deleted)
+  //     })
+  //   }
+  //   })
+  //   .catch(err => {
+  //    console.log(err);
+  //   res.status(500).json({message: "There was an error deleting this record"})
+  //        })
+  //   });
 
 //DELETE request
 router.delete('/:id',validateUserId, (req, res) => {
